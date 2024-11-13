@@ -3,13 +3,25 @@ import React, { useState } from 'react';
 function EventForm({ addEvent }) {
   const [newEvent, setNewEvent] = useState("");
   const [eventDate, setEventDate] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (newEvent.trim() && eventDate.trim()) {
-      addEvent(newEvent, eventDate);
-      setNewEvent("");
-      setEventDate("");
+      setLoading(true);
+      setMessage(""); // Clear any previous message
+      try {
+        await addEvent(newEvent, eventDate); // Assuming addEvent is async
+        setNewEvent("");
+        setEventDate("");
+        setMessage("Event added successfully!");
+      } catch (error) {
+        console.error("Error adding event:", error);
+        setMessage("Failed to add event. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -20,13 +32,18 @@ function EventForm({ addEvent }) {
         placeholder="Enter event details"
         value={newEvent}
         onChange={(e) => setNewEvent(e.target.value)}
+        disabled={loading}
       />
       <input
         type="date"
         value={eventDate}
         onChange={(e) => setEventDate(e.target.value)}
+        disabled={loading}
       />
-      <button type="submit">Add Event</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Adding..." : "Add Event"}
+      </button>
+      {message && <p>{message}</p>}
     </form>
   );
 }

@@ -1,24 +1,159 @@
+/* Centering the header and adding styling */
 .App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  max-width: 800px;
+  width: 100%;
 }
 
+/* Styling the main title */
+.App-header h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 2em;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Styling the event form */
 .event-form {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
   margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.event-form input,
+.event-form button {
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+  max-width: 300px;
+}
+
+.event-form input:focus,
+.event-form button:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.event-form button {
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.event-form button:hover {
+  background-color: #357ABD;
+}
+
+/* Styling the timeline container */
 .timeline {
   margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
   text-align: left;
-  width: 60%;
 }
 
+/* Styling each timeline event */
 .timeline-event {
-  background-color: #f1f1f1;
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-event p {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333333;
+}
+
+.timeline-event small {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #777777;
+}
+
+/* Container for the login and signup forms */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Form styling for inputs and button */
+.form-container input,
+.form-container button {
+  font-size: 1em;
   padding: 10px;
-  margin-bottom: 10px;
   border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.form-container input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.form-container button {
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+.form-container button:hover {
+  background-color: #357ABD;
+}
+
+/* Title styling for login and signup forms */
+.form-title {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5em;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+/* Additional styling for error or success messages */
+.form-message {
+  font-size: 0.9em;
+  color: #e74c3c; /* Red color for error messages */
+  margin-top: 5px;
+}
+
+.success-message {
+  color: #2ecc71; /* Green color for success messages */
 }
