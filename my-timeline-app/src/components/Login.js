@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Alert, Container } from 'react-bootstrap';
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -16,7 +17,6 @@ function Login({ onLogin }) {
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        console.log("Token stored:", data.token); // Debugging token storage
         onLogin(data.userId);
         setMessage("Logged in successfully!");
       } else {
@@ -29,25 +29,37 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="form-title">Log In</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-        <button type="submit">Log In</button>
-      </form>
-      {message && <p className="form-message">{message}</p>}
-    </div>
+    <Container className="p-4 rounded shadow-sm bg-white" style={{ maxWidth: '400px' }}>
+      <h2 className="text-center mb-4">Log In</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="loginEmail" className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="loginPassword" className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" className="w-100">
+          Log In
+        </Button>
+      </Form>
+      {message && (
+        <Alert variant={message.includes("successfully") ? "success" : "danger"} className="mt-3">
+          {message}
+        </Alert>
+      )}
+    </Container>
   );
 }
 

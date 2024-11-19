@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Alert, Container } from 'react-bootstrap';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -8,44 +9,64 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5001/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, password })
-    });
-    if (response.ok) {
-      setMessage("User created successfully!");
-    } else {
-      setMessage("Error signing up.");
+    try {
+      const response = await fetch('http://localhost:5001/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password })
+      });
+      if (response.ok) {
+        setMessage("User created successfully!");
+      } else {
+        setMessage("Error signing up.");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      setMessage("An error occurred. Please try again.");
     }
   };
 
   return (
-    <div className="form-container">
-      <h2 className="form-title">Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-        />
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-      {message && <p className="form-message success-message">{message}</p>}
-    </div>
+    <Container className="p-4 rounded shadow-sm bg-white" style={{ maxWidth: '400px' }}>
+      <h2 className="text-center mb-4">Sign Up</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="signUpUsername" className="mb-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="signUpEmail" className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="signUpPassword" className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" className="w-100">
+          Sign Up
+        </Button>
+      </Form>
+      {message && (
+        <Alert variant={message.includes("successfully") ? "success" : "danger"} className="mt-3">
+          {message}
+        </Alert>
+      )}
+    </Container>
   );
 }
 

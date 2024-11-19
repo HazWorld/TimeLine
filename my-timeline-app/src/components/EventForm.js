@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 
 function EventForm({ addEvent }) {
   const [newEvent, setNewEvent] = useState("");
@@ -26,25 +27,38 @@ function EventForm({ addEvent }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="event-form">
-      <input
-        type="text"
-        placeholder="Enter event details"
-        value={newEvent}
-        onChange={(e) => setNewEvent(e.target.value)}
-        disabled={loading}
-      />
-      <input
-        type="date"
-        value={eventDate}
-        onChange={(e) => setEventDate(e.target.value)}
-        disabled={loading}
-      />
-      <button type="submit" disabled={loading}>
-        {loading ? "Adding..." : "Add Event"}
-      </button>
-      {message && <p>{message}</p>}
-    </form>
+    <Form onSubmit={handleSubmit} className="event-form p-3 rounded shadow-sm bg-white">
+      <Form.Group controlId="eventDetails" className="mb-3">
+        <Form.Label>Event Details</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter event details"
+          value={newEvent}
+          onChange={(e) => setNewEvent(e.target.value)}
+          disabled={loading}
+        />
+      </Form.Group>
+      <Form.Group controlId="eventDate" className="mb-3">
+        <Form.Label>Event Date</Form.Label>
+        <Form.Control
+          type="date"
+          value={eventDate}
+          onChange={(e) => setEventDate(e.target.value)}
+          disabled={loading}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit" disabled={loading} className="w-100">
+        {loading ? (
+          <>
+            <Spinner animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
+            Adding...
+          </>
+        ) : (
+          "Add Event"
+        )}
+      </Button>
+      {message && <Alert className="mt-3" variant={message.includes("success") ? "success" : "danger"}>{message}</Alert>}
+    </Form>
   );
 }
 

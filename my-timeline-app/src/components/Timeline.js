@@ -1,16 +1,17 @@
 import React from 'react';
 import TimelineEvent from './TimelineEvent';
+import { ListGroup, Container } from 'react-bootstrap';
 
 function Timeline({ events, onDeleteEvent }) {
   return (
-    <div className="timeline">
-      <h2>Timeline</h2>
-      <ul>
+    <Container className="mt-4">
+      <h2 className="text-center">Timeline</h2>
+      <ListGroup variant="flush">
         {events.map((event, index) => (
           <TimelineEvent key={index} event={event} onDelete={() => onDeleteEvent(event._id)} />
         ))}
-      </ul>
-    </div>
+      </ListGroup>
+    </Container>
   );
 }
 

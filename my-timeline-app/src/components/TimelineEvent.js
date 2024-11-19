@@ -1,12 +1,18 @@
 import React from 'react';
+import { ListGroup, Button } from 'react-bootstrap';
 
 function TimelineEvent({ event, onDelete }) {
   return (
-    <li className="timeline-event">
-      <p>{event.text}</p>
-      <small>{event.date}</small>
-      <button onClick={onDelete}>Delete</button>
-    </li>
+    <ListGroup.Item className="d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{event.text}</strong>
+        <br />
+        <small>{event.date}</small>
+      </div>
+      <Button variant="danger" onClick={onDelete} size="sm">
+        Delete
+      </Button>
+    </ListGroup.Item>
   );
 }
 

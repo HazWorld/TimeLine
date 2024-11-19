@@ -1,64 +1,38 @@
-/* Centering the header and adding styling */
-.App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #4a90e2;
-  color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 20px auto;
-  max-width: 800px;
-  width: 100%;
+/* General layout */
+.App {
+  background-color: #f8f9fa; /* Light background */
+  min-height: 100vh;
 }
 
-/* Styling the main title */
+/* Centering the header and adding styling */
+.App-header {
+  text-align: center;
+}
+
+/* Custom styling for the main title */
 .App-header h1 {
   font-family: 'Arial', sans-serif;
   font-size: 2em;
-  margin: 0;
   color: #ffffff;
 }
 
 /* Styling the event form */
 .event-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  max-width: 400px;
-  margin-top: 20px;
-  padding: 20px;
   background-color: #ffffff;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 20px auto;
 }
 
-.event-form input,
-.event-form button {
-  font-size: 1em;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-  max-width: 300px;
-}
-
+/* Override Bootstrap input styles if needed */
 .event-form input:focus,
 .event-form button:focus {
-  outline: none;
   border-color: #4a90e2;
+  box-shadow: none;
 }
 
-.event-form button {
-  background-color: #4a90e2;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
+/* Custom button hover for event form */
 .event-form button:hover {
   background-color: #357ABD;
 }
@@ -66,27 +40,21 @@
 /* Styling the timeline container */
 .timeline {
   margin-top: 20px;
-  width: 100%;
-  max-width: 800px;
-  text-align: left;
 }
 
 /* Styling each timeline event */
 .timeline-event {
   background-color: #ffffff;
   padding: 15px;
-  margin-bottom: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .timeline-event p {
   margin: 0;
   font-size: 1.1em;
   font-weight: bold;
-  color: #333333;
 }
 
 .timeline-event small {
@@ -95,48 +63,12 @@
   color: #777777;
 }
 
-/* Container for the login and signup forms */
+/* Login and Sign Up form container */
 .form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  width: 100%;
-  max-width: 400px;
-}
-
-/* Form styling for inputs and button */
-.form-container input,
-.form-container button {
-  font-size: 1em;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-  max-width: 300px;
-  box-sizing: border-box;
-}
-
-.form-container input:focus {
-  outline: none;
-  border-color: #4a90e2;
-}
-
-.form-container button {
-  background-color: #4a90e2;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border: none;
-}
-
-.form-container button:hover {
-  background-color: #357ABD;
 }
 
 /* Title styling for login and signup forms */
@@ -145,9 +77,10 @@
   font-size: 1.5em;
   color: #333333;
   margin-bottom: 10px;
+  text-align: center;
 }
 
-/* Additional styling for error or success messages */
+/* Styling for error and success messages */
 .form-message {
   font-size: 0.9em;
   color: #e74c3c; /* Red color for error messages */

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import EventForm from './components/EventForm';
 import Timeline from './components/Timeline';
 import SignUp from './components/Signup';
 import Login from './components/Login';
+import { Navbar, Nav, Button, Container, Row, Col } from 'react-bootstrap';
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -97,21 +97,41 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>My Timeline App</h1>
+      <Navbar bg="primary" variant="dark" expand="lg" className="mb-4">
+        <Container>
+          <Navbar.Brand href="#home">My Timeline App</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#timeline">Timeline</Nav.Link>
+              <Nav.Link href="#about">About</Nav.Link>
+            </Nav>
+            <Nav>
+              {!isLoggedIn ? (
+                <Button variant="outline-light" className="me-2" href="#sign-in">Sign In</Button>
+              ) : (
+                <Button variant="outline-light" onClick={handleLogout}>Logout</Button>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Container>
         {!isLoggedIn ? (
-          <>
-            <SignUp />
-            <Login onLogin={handleLogin} />
-          </>
+          <Row className="justify-content-center">
+            <Col md={6} lg={4}>
+              <SignUp />
+              <Login onLogin={handleLogin} />
+            </Col>
+          </Row>
         ) : (
           <>
-            <button onClick={handleLogout}>Logout</button>
+            <h2 className="text-center mb-4">Welcome to your Timeline</h2>
             <EventForm addEvent={addEvent} />
             <Timeline events={events} onDeleteEvent={deleteEvent} />
           </>
         )}
-      </header>
+      </Container>
     </div>
   );
 }

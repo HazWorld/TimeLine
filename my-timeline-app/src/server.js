@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
 
 const app = express();
 app.use(cors());
@@ -94,7 +94,7 @@ client.connect().then(() => {
   app.delete('/events/:eventId', authenticateToken, async (req, res) => {
     const { eventId } = req.params;
     try {
-      const result = await db.collection("events").deleteOne({ _id: new MongoClient.ObjectId(eventId) });
+      const result = await db.collection("events").deleteOne({ _id: new ObjectId(eventId) });
       if (result.deletedCount === 1) {
         res.json({ message: "Event deleted successfully" });
       } else {
